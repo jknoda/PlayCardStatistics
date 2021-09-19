@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { MenuModule } from './menu/menu.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -11,10 +14,14 @@ import { MenuModule } from './menu/menu.module';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     MenuModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    DashboardModule
   ],
-  providers: [],
+  providers: [    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

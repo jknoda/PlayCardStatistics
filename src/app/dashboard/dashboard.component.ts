@@ -7,12 +7,19 @@ import { DashboardModel } from './dashboard.model';
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  avatars: Avatar[];
-  selectedAvatar: Avatar;
+  avatars: iDropDown[];
+  selectedAvatar: iDropDown;
+
+  avatarsPar: iDropDown[];
+  selectedAvatarPar: iDropDown;
+
+  anoLista: iDropDown[] = [];
+  selectedAno: iDropDown;
 
   data: any;
   chartOptions: any;
-  
+  pl_partida = '';
+
   mostrar = false;
   p_venceu = 0;
   p_as = 0; 
@@ -28,25 +35,63 @@ export class DashboardComponent implements OnInit {
   private dashboard: DashboardModel = new DashboardModel();
 
   constructor(private service: DashboardService) {
+    const ano = new Date().getFullYear();
+    for (let i = ano-3; i <= ano; i++) {
+      var _this = this
+      _this.anoLista.push({name: i.toString(),code: i.toString(), imagem:""});
+    }
+    this.selectedAno = this.anoLista.slice(-1)[0];
+
     this.avatars = [
-      /*
-      {name: "avatar01",code:"01"},
-      {name: "avatar02",code:"02"},
-      {name: "avatar03",code:"03"},
-      {name: "avatar04",code:"04"},
-      {name: "avatar05",code:"05"},
-      {name: "avatar06",code:"06"},
-      */
-      {name: "avatar50",code:"50"},
-      {name: "avatar51",code:"51"},
-      {name: "avatar52",code:"52"},
-      {name: "avatar53",code:"53"},
-      {name: "avatar54",code:"54"},
-      {name: "avatar55",code:"55"},
-      {name: "avatar56",code:"56"},
-      //{name: "avatar90",code:"90"},
-    ];
+      {name: "avatar50",code:"50", imagem: "avatar50"},
+      {name: "avatar51",code:"51", imagem: "avatar51"},
+      {name: "avatar52",code:"52", imagem: "avatar52"},
+      {name: "avatar53",code:"53", imagem: "avatar53"},
+      {name: "avatar54",code:"54", imagem: "avatar54"},
+      {name: "avatar55",code:"55", imagem: "avatar55"},
+      {name: "avatar56",code:"56", imagem: "avatar56"},
+    ]    
     this.selectedAvatar = this.avatars[0];
+    this.avatars.forEach((value)=>{
+      let dados = {
+        jogador: parseInt(value.code),
+      };
+      this.service.getNome(dados).subscribe(
+        data => {
+            if (typeof(data) != 'undefined')
+            {
+              console.log('data:',data[0]["nome"]);
+              value.name = data[0]["nome"];
+            }
+        },
+        err => { console.log(err) }
+      );      
+    });
+    this.avatarsPar = [
+      {name: "avatar50",code:"50", imagem: "avatar50"},
+      {name: "avatar51",code:"51", imagem: "avatar51"},
+      {name: "avatar52",code:"52", imagem: "avatar52"},
+      {name: "avatar53",code:"53", imagem: "avatar53"},
+      {name: "avatar54",code:"54", imagem: "avatar54"},
+      {name: "avatar55",code:"55", imagem: "avatar55"},
+      {name: "avatar56",code:"56", imagem: "avatar56"},
+    ];
+    this.selectedAvatarPar = this.avatarsPar[0];
+    this.avatarsPar.forEach((value)=>{
+      let dados = {
+        jogador: parseInt(value.code),
+      };
+      this.service.getNome(dados).subscribe(
+        data => {
+            if (typeof(data) != 'undefined')
+            {
+              console.log('data:',data[0]["nome"]);
+              value.name = data[0]["nome"];
+            }
+        },
+        err => { console.log(err) }
+      );      
+    });
   }
 
   ngOnInit(): void {
@@ -55,10 +100,12 @@ export class DashboardComponent implements OnInit {
   consultar(): void {
     let dados = {
         jogador: parseInt(this.selectedAvatar.code),
-        ano: 2021,
+        parceiro: parseInt(this.selectedAvatarPar.code),
+        ano: parseInt(this.selectedAno.code),
         mesini: 1,
         mesfim: 12
     };
+    console.log('dados: ',dados);
     this.service.getDados(dados).subscribe(
       data => {
           if (typeof(data) != 'undefined')
@@ -74,26 +121,21 @@ export class DashboardComponent implements OnInit {
 
   totalizarDados(dashboard)
   {
+    this.zerar();
     let index = 0; 
     let vulindex = 0;
     let indexpartidas = 0;
-    let venceu = 0;
-    let as = 0;
-    let al = 0;
-    let cs = 0;
-    let cl = 0;
-    let rl = 0;
-    let rs = 0;
     let vulpto = 0;
     let pto = 0;
     let q_venceu = -99;
+    let _this = this;
     dashboard.forEach(function (value) {
       if (value.ptoa != 0 || value.ptob != 0){
         index++;
       }
       if (q_venceu != value.idf){
         if (value.venceu){
-          venceu++;
+          _this.p_venceu++;
         }
         q_venceu = value.idf;
         indexpartidas++;
@@ -101,12 +143,12 @@ export class DashboardComponent implements OnInit {
       if (value.vulpto > 0){
         vulindex++;
       }
-      as += value.as;
-      al += value.al;
-      cs += value.cs;
-      cl += value.cl;
-      rs += value.rs;
-      rl += value.rl;
+      _this.p_as += value.as;
+      _this.p_al += value.al;
+      _this.p_cs += value.cs;
+      _this.p_cl += value.cl;
+      _this.p_rs += value.rs;
+      _this.p_rl += value.rl;
       vulpto += value.vulpto;
       if (value.jog == 'a'){
         pto += value.ptoa;
@@ -131,21 +173,15 @@ export class DashboardComponent implements OnInit {
 
     this.p_vulpto = Math.round(this.p_vulpto);
     this.p_pto = Math.round(this.p_pto);
-    this.p_venceu = venceu;
-    this.p_as = as;
-    this.p_al = al;
-    this.p_cs = cs;
-    this.p_cl = cl;
-    this.p_rs = rs;
-    this.p_rl = rl;
     this.p_totalpartidas = indexpartidas;
-    let perdeu = indexpartidas - venceu;
+    let perdeu = indexpartidas - this.p_venceu;
+    this.pl_partida = this.p_venceu > 1 ? 's' : '';
 
     this.data = {
       labels: ['Vitórias','Derrotas'],
       datasets: [
           {
-              data: [venceu, perdeu],
+              data: [this.p_venceu, perdeu],
               backgroundColor: [
                   "#17ee28",
                   "#e01a15"
@@ -160,10 +196,24 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  zerar(){
+    this.p_venceu = 0;
+    this.p_as = 0; 
+    this.p_al = 0; 
+    this.p_cs = 0; 
+    this.p_cl = 0; 
+    this.p_rl = 0; 
+    this.p_rs = 0; 
+    this.p_vulpto = 0;
+    this.p_pto = 0;
+    this.p_totalpartidas = 0;
+  }
+
 }
 
 
-interface Avatar {
+interface iDropDown {
   name: string,
   code: string
+  imagem: string;
 }

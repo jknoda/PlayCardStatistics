@@ -1,50 +1,88 @@
 <div class="container">
     <div class="row">
-      <div class="col-sm-4">
-        <p-card>
-            <div class="col-sm-6">
-                <p-dropdown [options]="avatars" [(ngModel)]="selectedAvatar" optionLabel="name">
-                    <ng-template pTemplate="selectedItem">
-                        <div *ngIf="selectedAvatar">
-                            <img src = "../../assets/avatars/{{selectedAvatar.name}}.png" width="20px" height="20px" />
-                            <div>{{selectedAvatar.name}}</div>
-                        </div>
-                    </ng-template>
-                    <ng-template let-avatar pTemplate="item">
-                        <div>
-                            <img src = "../../assets/avatars/{{avatar.name}}.png" width="20px" height="20px" />
-                            <div>{{avatar.name}}</div>
-                        </div>
-                    </ng-template>
-                </p-dropdown>
-            </div>
-            <div class="col-sm-6">
-                <button class="btn btn-primary" (click)="consultar()">Consultar</button>
-            </div>
-        </p-card>
-      </div>
-      <div class="col-sm-4">
-        <p-card>
-            <div *ngIf="mostrar">
-                <div>Venceu: {{ p_venceu }} partidas.</div>
-                <div>Mil limpa: {{ p_rl }}</div>
-                <div>Mil suja: {{ p_rs }}</div>
-                <div>As a As limpa: {{ p_al }}</div>
-                <div>As a As suja: {{ p_as }}</div>
-                <div>Canastra limpa: {{ p_cl }}</div>
-                <div>Canastra suja: {{ p_cs }}</div>
-                <div>Baixou em média {{ p_vulpto }} pontos no vul</div>
-                <div>Fez em média {{ p_pto }} pontos por rodada</div>
-            </div>
+        <div class="col-sm-4">
+            <p-card>
+                <div class="row">
+                    <label>Ano</label>
+                    <p-dropdown [options]="anoLista" [(ngModel)]="selectedAno" optionLabel="name">
+                        <ng-template pTemplate="selectedItem">
+                            <div *ngIf="selectedAno">
+                                <div>{{selectedAno.name}}</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-ano pTemplate="item">
+                            <div>
+                                <div>{{ano.name}}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Jogador</label>
+                        <p-dropdown [options]="avatars" [(ngModel)]="selectedAvatar" optionLabel="name">
+                            <ng-template pTemplate="selectedItem">
+                                <div *ngIf="selectedAvatar">
+                                    <img src = "../../assets/avatars/{{selectedAvatar.imagem}}.png" width="20px" height="20px" />
+                                    <div>{{selectedAvatar.name}}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-avatar pTemplate="item">
+                                <div>
+                                    <img src = "../../assets/avatars/{{avatar.imagem}}.png" width="20px" height="20px" />
+                                    <div>{{avatar.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
 
-        </p-card>
-      </div>
-      <div class="col-sm-4">
-        <p-card>
-            <div *ngIf="mostrar">
-                <p-chart type="pie" [data]="data" [style]="{'width': '40%'}"></p-chart>
+                    <div class="col-sm-4">
+                        <label>Parceiro</label>
+                        <p-dropdown [options]="avatarsPar" [(ngModel)]="selectedAvatarPar" optionLabel="name">
+                            <ng-template pTemplate="selectedItem">
+                                <div *ngIf="selectedAvatarPar">
+                                    <img src = "../../assets/avatars/{{selectedAvatarPar.imagem}}.png" width="20px" height="20px" />
+                                    <div>{{selectedAvatarPar.name}}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-avatarPar pTemplate="itemPar">
+                                <div>
+                                    <img src = "../../assets/avatars/{{avatarPar.imagem}}.png" width="20px" height="20px" />
+                                    <div>{{avatarPar.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary" (click)="consultar()">Consultar</button>
+                    </div>
+                </div>                
+            </p-card>
+        </div>
+        <div *ngIf="mostrar">
+            <div class="col-sm-4">
+                <p-card>
+                    <div>
+                        <div>Venceu: {{ p_venceu }} partida{{pl_partida}}.</div>
+                        <div>Mil limpa: {{ p_rl }}</div>
+                        <div>Mil suja: {{ p_rs }}</div>
+                        <div>As a As limpa: {{ p_al }}</div>
+                        <div>As a As suja: {{ p_as }}</div>
+                        <div>Canastra limpa: {{ p_cl }}</div>
+                        <div>Canastra suja: {{ p_cs }}</div>
+                        <div>Baixou em média {{ p_vulpto }} pontos no vul</div>
+                        <div>Fez em média {{ p_pto }} pontos por rodada</div>
+                    </div>
+                </p-card>
             </div>
-        </p-card>
-      </div>
+            <div class="col-sm-4">
+                <p-card>
+                    <div>
+                        <p-chart type="pie" [data]="data" [style]="{'width': '40%'}"></p-chart>
+                    </div>
+                </p-card>
+            </div>
+        </div>
     </div>
-  </div>
+</div>

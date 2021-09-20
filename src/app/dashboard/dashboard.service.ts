@@ -15,4 +15,12 @@ export class DashboardService {
         };        
         return this.http.post<DashboardModel>(this.url + "/oapi/playctrlstat/findallstat", body, httpOptions);
     }
+
+    getNome(body:any): Observable<string> {
+        let httpOptions = {
+            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        };        
+        return this.http.post<string>(this.url + "/oapi//playctrl/findname", body, httpOptions);
+    }
+
 }

@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter } from '@angular/core';
 import { DashboardService } from './dashboard.service';
-import { DashboardModel } from './dashboard.model';
+import { JogadasModel } from '../model/jogadas.model';
 
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  avatars: iDropDown[];
-  selectedAvatar: iDropDown;
-
-  avatarsPar: iDropDown[];
-  selectedAvatarPar: iDropDown;
-
-  anoLista: iDropDown[] = [];
-  selectedAno: iDropDown;
+  jogador = 0;
+  parceiro = 0;
+  ano = 0;
 
   data: any;
   chartOptions: any;
@@ -32,76 +27,29 @@ export class DashboardComponent implements OnInit {
   p_pto = 0;
   p_totalpartidas = 0;
 
-  private dashboard: DashboardModel = new DashboardModel();
+  private dashboard: JogadasModel = new JogadasModel();
 
   constructor(private service: DashboardService) {
-    const ano = new Date().getFullYear();
-    for (let i = ano-3; i <= ano; i++) {
-      var _this = this
-      _this.anoLista.push({name: i.toString(),code: i.toString(), imagem:""});
-    }
-    this.selectedAno = this.anoLista.slice(-1)[0];
-
-    this.avatars = [
-      {name: "avatar50",code:"50", imagem: "avatar50"},
-      {name: "avatar51",code:"51", imagem: "avatar51"},
-      {name: "avatar52",code:"52", imagem: "avatar52"},
-      {name: "avatar53",code:"53", imagem: "avatar53"},
-      {name: "avatar54",code:"54", imagem: "avatar54"},
-      {name: "avatar55",code:"55", imagem: "avatar55"},
-      {name: "avatar56",code:"56", imagem: "avatar56"},
-    ]    
-    this.selectedAvatar = this.avatars[0];
-    this.avatars.forEach((value)=>{
-      let dados = {
-        jogador: parseInt(value.code),
-      };
-      this.service.getNome(dados).subscribe(
-        data => {
-            if (typeof(data) != 'undefined')
-            {
-              console.log('data:',data[0]["nome"]);
-              value.name = data[0]["nome"];
-            }
-        },
-        err => { console.log(err) }
-      );      
-    });
-    this.avatarsPar = [
-      {name: "avatar50",code:"50", imagem: "avatar50"},
-      {name: "avatar51",code:"51", imagem: "avatar51"},
-      {name: "avatar52",code:"52", imagem: "avatar52"},
-      {name: "avatar53",code:"53", imagem: "avatar53"},
-      {name: "avatar54",code:"54", imagem: "avatar54"},
-      {name: "avatar55",code:"55", imagem: "avatar55"},
-      {name: "avatar56",code:"56", imagem: "avatar56"},
-    ];
-    this.selectedAvatarPar = this.avatarsPar[0];
-    this.avatarsPar.forEach((value)=>{
-      let dados = {
-        jogador: parseInt(value.code),
-      };
-      this.service.getNome(dados).subscribe(
-        data => {
-            if (typeof(data) != 'undefined')
-            {
-              console.log('data:',data[0]["nome"]);
-              value.name = data[0]["nome"];
-            }
-        },
-        err => { console.log(err) }
-      );      
-    });
   }
 
   ngOnInit(): void {
   }
 
+  onAno(ano){
+    this.ano = ano;
+  }
+  onJogador(jogador){
+    this.jogador = jogador;
+  }
+  onParceiro(parceiro){
+    this.parceiro = parceiro;
+  }
+
   consultar(): void {
     let dados = {
-        jogador: parseInt(this.selectedAvatar.code),
-        parceiro: parseInt(this.selectedAvatarPar.code),
-        ano: parseInt(this.selectedAno.code),
+        jogador: this.jogador,
+        parceiro: this.parceiro,
+        ano: this.ano,
         mesini: 1,
         mesfim: 12
     };
@@ -209,11 +157,4 @@ export class DashboardComponent implements OnInit {
     this.p_totalpartidas = 0;
   }
 
-}
-
-
-interface iDropDown {
-  name: string,
-  code: string
-  imagem: string;
 }

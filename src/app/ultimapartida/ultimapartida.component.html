@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+         <div class="col-sm-4">
+            <p-card>
+                <div class="col-sm-8">
+                    <selecionar 
+                    (anoSel)="onAno($event)"
+                    (jogadorSel)="onJogador($event)"
+                    (parceiroSel)="onParceiro($event)"
+                    ></selecionar>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-primary" (click)="consultar()">Consultar</button>
+                </div>
+            </p-card>
+         </div>
+         <div class="col-sm-8" *ngIf="mostrar">
+            <p-card>
+                <div>
+                    Jogadores:<br>
+                    "{{jogadorA01}}" e "{{jogadorA02}}"<br>X<br>
+                    "{{jogadorB01}}" e "{{jogadorB02}}"
+                </div>
+            </p-card>
+         </div>
+    </div>
+</div>
+

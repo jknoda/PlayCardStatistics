@@ -1,63 +1,17 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-4">
+         <div class="col-sm-4">
             <p-card>
-                <div class="row">
-                    <label>Ano</label>
-                    <p-dropdown [options]="anoLista" [(ngModel)]="selectedAno" optionLabel="name">
-                        <ng-template pTemplate="selectedItem">
-                            <div *ngIf="selectedAno">
-                                <div>{{selectedAno.name}}</div>
-                            </div>
-                        </ng-template>
-                        <ng-template let-ano pTemplate="item">
-                            <div>
-                                <div>{{ano.name}}</div>
-                            </div>
-                        </ng-template>
-                    </p-dropdown>
+                <div class="col-sm-8">
+                    <selecionar 
+                        (anoSel)="onAno($event)"
+                        (jogadorSel)="onJogador($event)"
+                        (parceiroSel)="onParceiro($event)"
+                    ></selecionar>
                 </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label>Jogador</label>
-                        <p-dropdown [options]="avatars" [(ngModel)]="selectedAvatar" optionLabel="name">
-                            <ng-template pTemplate="selectedItem">
-                                <div *ngIf="selectedAvatar">
-                                    <img src = "../../assets/avatars/{{selectedAvatar.imagem}}.png" width="20px" height="20px" />
-                                    <div>{{selectedAvatar.name}}</div>
-                                </div>
-                            </ng-template>
-                            <ng-template let-avatar pTemplate="item">
-                                <div>
-                                    <img src = "../../assets/avatars/{{avatar.imagem}}.png" width="20px" height="20px" />
-                                    <div>{{avatar.name}}</div>
-                                </div>
-                            </ng-template>
-                        </p-dropdown>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <label>Parceiro</label>
-                        <p-dropdown [options]="avatarsPar" [(ngModel)]="selectedAvatarPar" optionLabel="name">
-                            <ng-template pTemplate="selectedItem">
-                                <div *ngIf="selectedAvatarPar">
-                                    <img src = "../../assets/avatars/{{selectedAvatarPar.imagem}}.png" width="20px" height="20px" />
-                                    <div>{{selectedAvatarPar.name}}</div>
-                                </div>
-                            </ng-template>
-                            <ng-template let-avatarPar pTemplate="itemPar">
-                                <div>
-                                    <img src = "../../assets/avatars/{{avatarPar.imagem}}.png" width="20px" height="20px" />
-                                    <div>{{avatarPar.name}}</div>
-                                </div>
-                            </ng-template>
-                        </p-dropdown>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <button class="btn btn-primary" (click)="consultar()">Consultar</button>
-                    </div>
-                </div>                
+                <div class="col-sm-4">
+                    <button class="btn btn-primary" (click)="consultar()">Consultar</button>
+                </div>
             </p-card>
         </div>
         <div *ngIf="mostrar">

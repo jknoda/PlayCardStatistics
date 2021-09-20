@@ -1,4 +1,4 @@
-export class DashboardModel {
+export class JogadasModel {
     public idf: number;
     public rodada: number;
     public placara: number;

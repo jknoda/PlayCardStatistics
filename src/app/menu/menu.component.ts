@@ -15,8 +15,8 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {label: 'Home', icon: 'fas fa-home', routerLink:['home']},
-      {label: 'Dashboard', icon: 'fas fa-tachometer-alt', routerLink:['dashboard']},      
-      {label: 'Calendar', icon: 'fas fa-calendar'},
+      {label: 'Dashboard', icon: 'fas fa-tachometer-alt', routerLink:['dashboard']},
+      {label: 'Last Game', icon: 'fas fa-scroll', routerLink:['lastgame']},
       {label: 'Edit', icon: 'fas fa-edit'},
       {label: 'Settings', icon: 'fas fai-cog'}
     ];

@@ -1,29 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardService } from './dashboard.service';
-import { DashboardComponent } from './dashboard.component';
+import { SelecionarService } from './selecionar.service';
+import { SelecionarComponent } from './selecionar.component';
 import {CardModule} from 'primeng/card';
 import {DropdownModule} from 'primeng/dropdown';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
-import {ChartModule} from 'primeng/chart';
-import { SelecionarModule } from '../selecionar/selecionar.module';
 
 @NgModule({
-    declarations: [DashboardComponent],
+    declarations: [SelecionarComponent],
     imports:[
         CommonModule,
         CardModule,
         ScrollingModule,
         DropdownModule,
         BrowserAnimationsModule,
-        FormsModule,
-        ChartModule,
-        SelecionarModule
+        FormsModule
     ],
-    providers: [DashboardService],
-    exports: [DashboardComponent],
+    providers: [SelecionarService],
+    exports: [SelecionarComponent],
 })
-
-export class DashboardModule { }
+export class SelecionarModule { }

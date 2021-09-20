@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { JogadasModel } from '../model/jogadas.model';
 import { Observable } from 'rxjs';
 import { ServiceConfig } from '../_config/services.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { JogoModel } from '../model/jogo.model';
 
 @Injectable()
-export class DashboardService {
+export class UltimapartidaService {
     private url: string = ServiceConfig.API_ENDPOINT;
     constructor(private http: HttpClient) { }
 
-    getDados(body:any): Observable<JogadasModel> {
+    getDados(body:any): Observable<JogoModel> {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<JogadasModel>(this.url + "/oapi/playctrlstat/findallstat", body, httpOptions);
+        return this.http.post<JogoModel>(this.url + "/oapi/playctrl/findlastgame", body, httpOptions);
     }
 }

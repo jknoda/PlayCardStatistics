@@ -30,6 +30,7 @@ export class UltimapartidaComponent implements OnInit {
 
   consultar(e) {
     this.mostrar = false;
+    let idf = 0;
     let dados = {
         jogador: this.jogador,
         parceiro: this.parceiro,
@@ -39,7 +40,9 @@ export class UltimapartidaComponent implements OnInit {
           if (typeof(data) != 'undefined')
           {
             this.ultimajogada = data;
-            if (this.ultimajogada[0]["ava01"] > 0){
+            
+            if (typeof(this.ultimajogada[0]) != 'undefined'){
+              idf = this.ultimajogada[0]["idf"];
               this.avatar[1] = "avatar" + this.ultimajogada[0]["ava01"].toString().padStart(2, '0')+".png";
               this.avatar[2] = "avatar" + this.ultimajogada[0]["ava02"].toString().padStart(2, '0')+".png";
               this.avatar[3] = "avatar" + this.ultimajogada[0]["avb01"].toString().padStart(2, '0')+".png";
@@ -52,7 +55,7 @@ export class UltimapartidaComponent implements OnInit {
           }
       },
       err => { console.log(err) },
-      () => this.getRodada(this.ultimajogada[0]["idf"])
+      () => this.getRodada(idf)
     )
   }
       
@@ -84,7 +87,7 @@ export class UltimapartidaComponent implements OnInit {
                 element.avBateu = this.avatar[element.batidab];
               }
             });
-            console.log('data: ',data);
+            //console.log('data: ',data);
             this.rodadas = data;
             //console.log('rodadas: ', this.rodadas);
           }
@@ -105,7 +108,7 @@ export class UltimapartidaComponent implements OnInit {
 ''
   dataForma(data):string{
     let dataAux = new Date(data);
-    console.log('data:', typeof(dataAux));
+    //console.log('data:', typeof(dataAux));
     let dia  = dataAux.getDate().toString().padStart(2, '0');
     let mes  = (dataAux.getMonth()+1).toString().padStart(2, '0');
     let ano  = dataAux.getFullYear();

@@ -1,3 +1,4 @@
+import { computeMsgId } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter, ComponentFactoryResolver, Input  } from '@angular/core';
 import { SelecionarService } from './selecionar.service';
 
@@ -24,6 +25,7 @@ export class SelecionarComponent implements OnInit {
   @Input() mostraAno: boolean;
 
   constructor(private service: SelecionarService) {
+    let aux = "";
     const ano = new Date().getFullYear();
     for (let i = ano-3; i <= ano; i++) {
       var _this = this
@@ -39,7 +41,6 @@ export class SelecionarComponent implements OnInit {
       {name: "avatar55",code:"55", imagem: "avatar55"},
       {name: "avatar56",code:"56", imagem: "avatar56"},
     ]    
-    this.selectedAvatar = this.avatars[0];
     this.avatars.forEach((value)=>{
       let dados = {
         jogador: parseInt(value.code),
@@ -51,7 +52,8 @@ export class SelecionarComponent implements OnInit {
               value.name = data[0]["nome"];
             }
         },
-        err => { console.log(err) }
+        err => { console.log(err) },
+        () => this.setJogador()
       );      
     });
     this.avatarsPar = [
@@ -63,7 +65,6 @@ export class SelecionarComponent implements OnInit {
       {name: "avatar55",code:"55", imagem: "avatar55"},
       {name: "avatar56",code:"56", imagem: "avatar56"},
     ];
-    this.selectedAvatarPar = this.avatarsPar[0];
     this.avatarsPar.forEach((value)=>{
       let dados = {
         jogador: parseInt(value.code),
@@ -75,14 +76,35 @@ export class SelecionarComponent implements OnInit {
               value.name = data[0]["nome"];
             }
         },
-        err => { console.log(err) }
+        err => { console.log(err) },
+        () => this.setParceiro()
       );      
     });
   }
 
   ngOnInit(): void {
     this.onAno(0);
+  }
+
+  setJogador(){
+    let aux = localStorage.getItem("jogador");
+    if (aux != null){
+      this.selectedAvatar = JSON.parse(aux);
+    }
+    else{
+      this.selectedAvatar = this.avatars[0];
+    }
     this.onJogador(0);
+  }
+
+  setParceiro(){
+    let aux = localStorage.getItem("parceiro");
+    if (aux != null){
+      this.selectedAvatarPar = JSON.parse(aux);
+    }
+    else{
+      this.selectedAvatarPar = this.avatarsPar[0];
+    }
     this.onParceiro(0);
   }
 
@@ -94,9 +116,11 @@ export class SelecionarComponent implements OnInit {
     this.anoSel.emit(parseInt(this.selectedAno.code));
   }
   onJogador(e){
+    localStorage.setItem('jogador', JSON.stringify(this.selectedAvatar));
     this.jogadorSel.emit(parseInt(this.selectedAvatar.code));
   }
   onParceiro(e){
+    localStorage.setItem('parceiro', JSON.stringify(this.selectedAvatarPar));
     this.parceiroSel.emit(parseInt(this.selectedAvatarPar.code));
   }  
 }

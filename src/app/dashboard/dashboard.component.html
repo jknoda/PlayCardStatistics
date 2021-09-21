@@ -1,21 +1,19 @@
 <div class="container">
     <div class="row">
-         <div class="col-sm-4">
+         <div class="col-lg-4 col-sm-12">
             <p-card>
                 <div class="col-sm-8">
                     <selecionar 
                         (anoSel)="onAno($event)"
                         (jogadorSel)="onJogador($event)"
                         (parceiroSel)="onParceiro($event)"
+                        (callConsultar)="consultar($event)"
                     ></selecionar>
-                </div>
-                <div class="col-sm-4">
-                    <button class="btn btn-primary" (click)="consultar()">Consultar</button>
                 </div>
             </p-card>
         </div>
         <div *ngIf="mostrar">
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-sm-12">
                 <p-card>
                     <div>
                         <div>Venceu: {{ p_venceu }} partida{{pl_partida}}.</div>
@@ -30,7 +28,7 @@
                     </div>
                 </p-card>
             </div>
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-sm-12">
                 <p-card>
                     <div>
                         <p-chart type="pie" [data]="data" [style]="{'width': '40%'}"></p-chart>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ComponentFactoryResolver  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ComponentFactoryResolver, Input  } from '@angular/core';
 import { SelecionarService } from './selecionar.service';
 
 @Component({
@@ -10,6 +10,7 @@ export class SelecionarComponent implements OnInit {
   @Output() anoSel = new EventEmitter<Number>();
   @Output() jogadorSel = new EventEmitter<Number>();
   @Output() parceiroSel = new EventEmitter<Number>();
+  @Output() callConsultar = new EventEmitter<any>();
 
   avatars: iDropDown[];
   selectedAvatar: iDropDown;
@@ -19,6 +20,8 @@ export class SelecionarComponent implements OnInit {
 
   anoLista: iDropDown[] = [];
   selectedAno: iDropDown;
+
+  @Input() mostraAno: boolean;
 
   constructor(private service: SelecionarService) {
     const ano = new Date().getFullYear();
@@ -81,6 +84,10 @@ export class SelecionarComponent implements OnInit {
     this.onAno(0);
     this.onJogador(0);
     this.onParceiro(0);
+  }
+
+  consultar(){
+    this.callConsultar.emit(null);
   }
 
   onAno(e){

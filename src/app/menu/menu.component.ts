@@ -17,8 +17,8 @@ export class MenuComponent implements OnInit {
       {label: 'Home', icon: 'fas fa-home', routerLink:['home']},
       {label: 'Dashboard', icon: 'fas fa-tachometer-alt', routerLink:['dashboard']},
       {label: 'Last Game', icon: 'fas fa-scroll', routerLink:['lastgame']},
-      {label: 'Edit', icon: 'fas fa-edit'},
-      {label: 'Settings', icon: 'fas fai-cog'}
+      //{label: 'Edit', icon: 'fas fa-edit'},
+      //{label: 'Settings', icon: 'fas fai-cog'}
     ];
   }
 }

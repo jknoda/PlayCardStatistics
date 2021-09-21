@@ -45,7 +45,8 @@ export class DashboardComponent implements OnInit {
     this.parceiro = parceiro;
   }
 
-  consultar(): void {
+  consultar(e): void {
+    this.mostrar = false;
     let dados = {
         jogador: this.jogador,
         parceiro: this.parceiro,
@@ -53,14 +54,16 @@ export class DashboardComponent implements OnInit {
         mesini: 1,
         mesfim: 12
     };
-    console.log('dados: ',dados);
+    //console.log('dados: ',dados);
     this.service.getDados(dados).subscribe(
       data => {
           if (typeof(data) != 'undefined')
           {
               this.dashboard = data;
               this.totalizarDados(this.dashboard);
-              this.mostrar = true;
+              if (this.p_totalpartidas > 0){
+                this.mostrar = true;
+              }
           }
       },
       err => { console.log(err) }

@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+         <div class="col-lg-4 col-sm-12">
+            <p-card>
+                <div class="col-sm-8">
+                    <selecionar 
+                        (anoSel)="onAno($event)"
+                        (jogadorSel)="onJogador($event)"
+                        (parceiroSel)="onParceiro($event)"
+                        (callConsultar)="consultar($event)"
+                    ></selecionar>
+                </div>
+            </p-card>
+        </div>
+        <div *ngIf="mostrar">
+            <div class="col-lg-8 col-sm-12">
+                <p-card>
+                    <div>
+                        <img src = "../../assets/image/{{resultadoImg}}" width="60px" height="60px" />
+                        Dupla será {{resultado}}
+                    </div>
+                </p-card>
+            </div>
+        </div>
+    </div>
+</div>

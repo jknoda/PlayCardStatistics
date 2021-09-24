@@ -11,8 +11,13 @@ export class DashboardService {
 
     getDados(body:any): Observable<JogadasModel> {
         let httpOptions = {
-            headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+            headers: new HttpHeaders({ 
+                'Accept': 'application/json', 
+                'Content-Type': 'application/json'
+            })
         };        
         return this.http.post<JogadasModel>(this.url + "/oapi/playctrlstat/findallstat", body, httpOptions);
     }
 }
+
+

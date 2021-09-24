@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { MenuModule } from './menu/menu.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UltimapartidaModule } from './ultimapartida/ultimapartida.module';
+import { PredictModule } from './predict/predict.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UltimapartidaModule } from './ultimapartida/ultimapartida.module';
     AppRoutingModule,
     HttpClientModule,
     DashboardModule,
-    UltimapartidaModule
+    UltimapartidaModule,
+    PredictModule
   ],
   providers: [    
   ],

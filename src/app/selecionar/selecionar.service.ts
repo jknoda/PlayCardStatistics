@@ -13,7 +13,7 @@ export class SelecionarService {
         let httpOptions = {
             headers: new HttpHeaders({ 'Accept': 'application/json', 'Content-Type': 'application/json' })
         };        
-        return this.http.post<string>(this.url + "/oapi//playctrl/findname", body, httpOptions);
+        return this.http.post<string>(this.url + "/oapi/playctrl/findname", body, httpOptions);
     }
 
 }

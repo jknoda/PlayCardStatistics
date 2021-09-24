@@ -49,7 +49,7 @@ export class UltimapartidaComponent implements OnInit {
               this.avatar[4] = "avatar" + this.ultimajogada[0]["avb02"].toString().padStart(2, '0')+".png";
               this.dataInicial = this.dataForma(this.ultimajogada[0]["inicio"]);
               this.dataFinal = this.dataForma(this.ultimajogada[0]["fim"]);
-              this.mostrar = true;
+              //this.mostrar = true;
             }
             //console.log('Avatar: ', this.avatar);
           }
@@ -86,6 +86,7 @@ export class UltimapartidaComponent implements OnInit {
               else{
                 element.avBateu = this.avatar[element.batidab];
               }
+              this.mostrar = true;
             });
             //console.log('data: ',data);
             this.rodadas = data;

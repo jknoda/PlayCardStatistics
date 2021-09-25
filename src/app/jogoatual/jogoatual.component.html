@@ -1,0 +1,14 @@
+<p>jogoatual works!</p>
+<div *ngIf="dadosOk">
+JOGADORES<br>
+{{dados["NickName"][0]}}&nbsp;/&nbsp;{{dados["NickName"][1]}}&nbsp;X&nbsp;{{dados["NickName"][2]}}&nbsp;/&nbsp;{{dados["NickName"][3]}}
+<br>
+<hr>
+Placar<br>
+{{duplaA}}&nbsp;:&nbsp;{{dados["Placar01"]}}<br>
+{{duplaB}}&nbsp;:&nbsp;{{dados["Placar02"]}}
+<br>
+<hr>
+JOGANDO AGORA<br>
+{{dados["NickName"][jogadorAtual]}}
+</div>

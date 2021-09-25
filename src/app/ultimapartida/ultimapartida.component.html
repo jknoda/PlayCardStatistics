@@ -1,20 +1,16 @@
 <div class="container">
     <div class="row">
          <div class="col-sm-3">
-            <p-card>
-                <div class="col-sm-8">
-                    <selecionar 
-                    mostraAno = "false"
-                    (anoSel)="onAno($event)"
-                    (jogadorSel)="onJogador($event)"
-                    (parceiroSel)="onParceiro($event)"
-                    (callConsultar)="consultar($event)"
-                    ></selecionar>
-                </div>
-            </p-card>
+            <selecionar 
+            mostraAno = "false"
+            (anoSel)="onAno($event)"
+            (jogadorSel)="onJogador($event)"
+            (parceiroSel)="onParceiro($event)"
+            (callConsultar)="consultar($event)"
+            ></selecionar>
          </div>
-         <div class="col-sm-5" *ngIf="mostrar">
-            <p-card>
+         <div class="col-sm-9" *ngIf="mostrar">
+            <div class="col-sm-12 col-md-6">
                 <div>
                     {{ultimajogada[0]["idf"]}}) Duplas:
                     <img src = "../../assets/avatars/{{ avatar[1] }}" width="20px" height="20px" /><img src = "../../assets/avatars/{{ avatar[2] }}" width="20px" height="20px" />
@@ -39,17 +35,12 @@
                     Quem Bateu: <img src = "../../assets/avatars/{{ rodada['avBateu'] }}" width="20px" height="20px" />
                     <hr>
                 </div>
-            </p-card>
-         </div>
-         <div class="col-sm-4" *ngIf="mostrar">
-            <p-card>
-                <div>
-                    Últimos bate-papos:<br>
-                    <span style="white-space: pre-line">{{ultimajogada[0]["obs"]}}</span>
-                </div>
-            </p-card>
-         </div>
-
+            </div>
+            <div class="col-sm-12 col-md-6" *ngIf="mostrar">
+                Últimos bate-papos:<br>
+                <span style="white-space: pre-line">{{ultimajogada[0]["obs"]}}</span>
+            </div>
+        </div>
     </div>
 </div>
 

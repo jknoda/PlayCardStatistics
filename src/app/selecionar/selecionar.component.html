@@ -1,7 +1,7 @@
-<div>
+<div class="selecionar">
     <div class="row">
-        <div class="col-lg-8 col-sm-8" *ngIf="!mostraAno">
-            <label>Ano</label>
+        <div class="col-sm-12 col-md-6" *ngIf="!mostraAno">
+            <div><b>Ano</b></div>
             <p-dropdown [options]="anoLista" [(ngModel)]="selectedAno" optionLabel="name" (onChange)="onAno($event)">
                 <ng-template pTemplate="selectedItem">
                     <div *ngIf="selectedAno">
@@ -15,40 +15,44 @@
                 </ng-template>
             </p-dropdown>
         </div>
-        <div class="col-lg-4 col-sm-4">
+        <div class="col-sm-12 col-md-6">
             <button class="btn btn-primary" (click)="consultar()">Consultar</button>
         </div>
     </div>
-    <div class="row" style="display: inline;">
-            <label>Jogador</label>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div><b>Jogador</b></div>
             <p-dropdown [options]="avatars" [(ngModel)]="selectedAvatar" optionLabel="name" (onChange)="onJogador($event)">
                 <ng-template pTemplate="selectedItem">
                     <div *ngIf="selectedAvatar">
                         <img src = "../../assets/avatars/{{selectedAvatar.imagem}}.png" width="20px" height="20px" />
-                        <div>{{selectedAvatar.name}}</div>
+                        <div style="display: inline;">&nbsp;&nbsp;{{selectedAvatar.name}}</div>
                     </div>
                 </ng-template>
                 <ng-template let-avatar pTemplate="item">
-                    <div>
+                    <div style="display: inline;">
                         <img src = "../../assets/avatars/{{avatar.imagem}}.png" width="20px" height="20px" />
-                        <div>{{avatar.name}}</div>
+                        <div style="display: inline;">&nbsp;&nbsp;{{avatar.name}}</div>
                     </div>
                 </ng-template>
             </p-dropdown>
-            <label>Parceiro</label>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div><b>Parceiro</b></div>
             <p-dropdown [options]="avatarsPar" [(ngModel)]="selectedAvatarPar" optionLabel="name" (onChange)="onParceiro($event)">
                 <ng-template pTemplate="selectedItem">
                     <div *ngIf="selectedAvatarPar">
                         <img src = "../../assets/avatars/{{selectedAvatarPar.imagem}}.png" width="20px" height="20px" />
-                        <div>{{selectedAvatarPar.name}}</div>
+                        <div style="display: inline;">&nbsp;&nbsp;{{selectedAvatarPar.name}}</div>
                     </div>
                 </ng-template>
                 <ng-template let-avatarPar pTemplate="itemPar">
                     <div>
                         <img src = "../../assets/avatars/{{avatarPar.imagem}}.png" width="20px" height="20px" />
-                        <div>{{avatarPar.name}}</div>
+                        <div style="display: inline;">&nbsp;&nbsp;{{avatarPar.name}}</div>
                     </div>
                 </ng-template>
             </p-dropdown>
+        </div>
     </div>
 </div>

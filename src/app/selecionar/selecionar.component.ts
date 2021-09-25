@@ -4,7 +4,13 @@ import { SelecionarService } from './selecionar.service';
 
 @Component({
   selector: 'selecionar',
-  templateUrl: './selecionar.component.html'
+  templateUrl: './selecionar.component.html',
+  styles:[`
+    .selecionar{
+      padding: 5px 5px 5px 5px; 
+      background-color: #54de54;
+    }
+  `]
 })
 
 export class SelecionarComponent implements OnInit {
@@ -35,13 +41,13 @@ export class SelecionarComponent implements OnInit {
     this.avatars = JSON.parse(localStorage.getItem("avatar"));
     if (this.avatars == null){
       this.avatars = [
-        {name: "avatar50",code:"50", imagem: "avatar50"},
-        {name: "avatar51",code:"51", imagem: "avatar51"},
-        {name: "avatar52",code:"52", imagem: "avatar52"},
-        {name: "avatar53",code:"53", imagem: "avatar53"},
-        {name: "avatar54",code:"54", imagem: "avatar54"},
-        {name: "avatar55",code:"55", imagem: "avatar55"},
-        {name: "avatar56",code:"56", imagem: "avatar56"},
+        {name: "mitsue",code:"50", imagem: "avatar50"},
+        {name: "mie",code:"51", imagem: "avatar51"},
+        {name: "paula",code:"52", imagem: "avatar52"},
+        {name: "sung",code:"53", imagem: "avatar53"},
+        {name: "tiemi",code:"54", imagem: "avatar54"},
+        {name: "dico",code:"55", imagem: "avatar55"},
+        {name: "celso",code:"56", imagem: "avatar56"},
       ]    
       this.avatars.forEach((value)=>{
         let dados = {
@@ -62,13 +68,13 @@ export class SelecionarComponent implements OnInit {
     this.avatarsPar = JSON.parse(localStorage.getItem("avatarpar"));
     if (this.avatarsPar == null){
       this.avatarsPar = [
-        {name: "avatar50",code:"50", imagem: "avatar50"},
-        {name: "avatar51",code:"51", imagem: "avatar51"},
-        {name: "avatar52",code:"52", imagem: "avatar52"},
-        {name: "avatar53",code:"53", imagem: "avatar53"},
-        {name: "avatar54",code:"54", imagem: "avatar54"},
-        {name: "avatar55",code:"55", imagem: "avatar55"},
-        {name: "avatar56",code:"56", imagem: "avatar56"},
+        {name: "mitsue",code:"50", imagem: "avatar50"},
+        {name: "mie",code:"51", imagem: "avatar51"},
+        {name: "paula",code:"52", imagem: "avatar52"},
+        {name: "sung",code:"53", imagem: "avatar53"},
+        {name: "tiemi",code:"54", imagem: "avatar54"},
+        {name: "dico",code:"55", imagem: "avatar55"},
+        {name: "celso",code:"56", imagem: "avatar56"},
       ];
       this.avatarsPar.forEach((value)=>{
         let dados = {

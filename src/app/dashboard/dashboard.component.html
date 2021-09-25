@@ -1,20 +1,16 @@
 <div class="container">
     <div class="row">
-         <div class="col-lg-4 col-sm-12">
-            <p-card>
-                <div class="col-sm-8">
-                    <selecionar 
-                        (anoSel)="onAno($event)"
-                        (jogadorSel)="onJogador($event)"
-                        (parceiroSel)="onParceiro($event)"
-                        (callConsultar)="consultar($event)"
-                    ></selecionar>
-                </div>
-            </p-card>
+        <div class="col-sm-12 col-md-4">
+            <selecionar 
+                (anoSel)="onAno($event)"
+                (jogadorSel)="onJogador($event)"
+                (parceiroSel)="onParceiro($event)"
+                (callConsultar)="consultar($event)"
+            ></selecionar>
         </div>
+
         <div *ngIf="mostrar">
-            <div class="col-lg-4 col-sm-12">
-                <p-card>
+            <div class="col-sm-12 col-md-4">
                     <div>
                         <div>Venceu: {{ p_venceu }} partida{{pl_partida}}.</div>
                         <div>Mil limpa: {{ p_rl }}</div>
@@ -26,14 +22,11 @@
                         <div>Baixou em média {{ p_vulpto }} pontos no vul</div>
                         <div>Fez em média {{ p_pto }} pontos por rodada</div>
                     </div>
-                </p-card>
             </div>
-            <div class="col-lg-4 col-sm-12">
-                <p-card>
+            <div class="col-sm-12 col-md-4">
                     <div>
                         <p-chart type="pie" [data]="data" [style]="{'width': '40%'}"></p-chart>
                     </div>
-                </p-card>
             </div>
         </div>
     </div>

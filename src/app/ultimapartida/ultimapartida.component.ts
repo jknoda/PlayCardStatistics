@@ -113,8 +113,8 @@ export class UltimapartidaComponent implements OnInit {
     let dia  = dataAux.getDate().toString().padStart(2, '0');
     let mes  = (dataAux.getMonth()+1).toString().padStart(2, '0');
     let ano  = dataAux.getFullYear();
-    let hora = dataAux.getHours().toString().padStart(2, '0');;
-    let min = dataAux.getMinutes().toString().padStart(2, '0');;
+    let hora = dataAux.getHours().toString().padStart(2, '0');
+    let min = dataAux.getMinutes().toString().padStart(2, '0');
     return `${dia}/${mes}/${ano} ${hora}:${min}`;
   }
 }

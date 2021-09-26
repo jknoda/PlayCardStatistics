@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { JogoatualComponent } from './jogoatual.component';
 import { JogoatualService } from './jogoatual.service';
 
-
-
 @NgModule({
   declarations: [JogoatualComponent],
   imports: [

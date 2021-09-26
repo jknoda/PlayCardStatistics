@@ -1,14 +1,43 @@
-<p>jogoatual works!</p>
-<div *ngIf="dadosOk">
-JOGADORES<br>
-{{dados["NickName"][0]}}&nbsp;/&nbsp;{{dados["NickName"][1]}}&nbsp;X&nbsp;{{dados["NickName"][2]}}&nbsp;/&nbsp;{{dados["NickName"][3]}}
-<br>
-<hr>
-Placar<br>
-{{duplaA}}&nbsp;:&nbsp;{{dados["Placar01"]}}<br>
-{{duplaB}}&nbsp;:&nbsp;{{dados["Placar02"]}}
-<br>
-<hr>
-JOGANDO AGORA<br>
-{{dados["NickName"][jogadorAtual]}}
+<h1>AGORA</h1>
+<div class="container">
+    <div>
+        <button class="btn btn-primary" (click)="getNow($event)">Atualizar</button>
+        &nbsp;&nbsp;
+        {{dataAtual}}        
+        <hr>
+    </div>
+    <div *ngIf="dadosOk">
+        JOGADORES<br>
+        <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][0]] }}" width="20px" height="20px" />&nbsp;
+        <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][2]] }}" width="20px" height="20px" />&nbsp;X&nbsp;
+        <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][1]] }}" width="20px" height="20px" />&nbsp;
+        <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][3]] }}" width="20px" height="20px" />
+        <br>
+        <hr>
+        Placar<br>
+        <div [ngClass]=[jogadoresAClass]>
+            <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][0]] }}" width="20px" height="20px" />&nbsp;
+            <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][2]] }}" width="20px" height="20px" />&nbsp;:&nbsp;{{dados["Placar01"]}}&nbsp;&nbsp;<br>
+        </div>
+        <div [ngClass]=[jogadoresBClass]>
+            <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][1]] }}" width="20px" height="20px" />&nbsp;
+            <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][3]] }}" width="20px" height="20px" />&nbsp;:&nbsp;{{dados["Placar02"]}}&nbsp;&nbsp;
+        </div>
+        <h1 [ngClass]="atualClass">{{ jogoFinalizado }}</h1>
+        <div *ngIf="!bjogoFinalizado" >
+            <hr>
+            JOGANDO AGORA<br>
+            <h2>{{dados["NickName"][dados["SeqJogadores"][jogadorAtual-1]-1]}}</h2>
+            <hr>
+            MORTO<br>
+            <p [innerText]="morto"></p>
+            VUL<br>
+            <p [innerText]="vul"></p>
+        </div>
+        <hr>
+        <div>
+            CONVERSA<br>
+            <p [innerText]="dados['MsgHistorico']"></p>
+        </div>
+    </div>
 </div>

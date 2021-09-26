@@ -13,8 +13,9 @@ const appRoutes: Routes = [
     {path: 'lastgame', component: UltimapartidaComponent},
     {path: 'predict', component: PredictComponent},
     {path: 'now', component: JogoatualComponent},
-    {path: '', redirectTo: '/', pathMatch: 'full'}
-    //{path: '**', component: PageNotFoundComponent}
+    //{path: '', redirectTo: '/', pathMatch: 'full'}
+    //{path: "",  component: HomeComponent, pathMatch: "full"},
+    {path: '**', component: HomeComponent}
 ]
 
 @NgModule({

@@ -1,0 +1,10 @@
+.ul-icons{
+    list-style-type: none;
+    padding-left: 40px; 
+}
+.ul-icons li{
+    display: inline-block;
+    /* font-size: 2em; */
+    color: #49bf9d;
+    padding-right: 5px;
+}

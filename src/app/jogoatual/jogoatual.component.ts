@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NowModel } from '../model/now.model';
 import { JogoatualService } from './jogoatual.service';
+import { List } from 'linqts';
 
 @Component({
   selector: 'jogoatual',
@@ -10,6 +11,8 @@ import { JogoatualService } from './jogoatual.service';
 export class JogoatualComponent implements OnInit {
 
   dados : any;
+  cartas : any;
+  qdeCartas = [0,0,0,0,0]; // monte jogador01, 02, 03, 04
   dadosOk = false;
   duplaA = "";
   duplaB = "";
@@ -44,7 +47,19 @@ export class JogoatualComponent implements OnInit {
           {
               this.now = data;
               this.dados = JSON.parse(data[0]["dados"]);
+              let aux = new List();
+              this.dados["MapaJogo"]["cartasJogo"].forEach(function(item){
+                //console.log('item:',item);
+                aux.Add(item);
+              });
+              this.cartas = aux;
+              //console.log('cartas:', this.cartas.Where(x => x.Portador == "MONTE").Count());
               //console.log('Mapa:', this.dados["MapaJogo"]["seqJogadorAtual"]);
+              this.qdeCartas[0] = this.cartas.Where(x => x.Portador == "MONTE").Count();
+              this.qdeCartas[1] = this.cartas.Where(x => x.Portador == "JOGADOR01").Count();
+              this.qdeCartas[2] = this.cartas.Where(x => x.Portador == "JOGADOR02").Count();
+              this.qdeCartas[3] = this.cartas.Where(x => x.Portador == "JOGADOR03").Count();
+              this.qdeCartas[4] = this.cartas.Where(x => x.Portador == "JOGADOR04").Count();
               this.jogadorAtual = this.dados["MapaJogo"]["seqJogadorAtual"];
               this.duplaA = this.dados["NickName"][0] + " / " + this.dados["NickName"][1];
               this.duplaB = this.dados["NickName"][2] + " / " + this.dados["NickName"][3];
@@ -72,6 +87,8 @@ export class JogoatualComponent implements OnInit {
               else{
                 this.jogoFinalizado = "Jogo em andamento";    
                 this.atualClass = "andamento";
+                this.jogadoresAClass = "";
+                this.jogadoresBClass = "";
               }
 
               this.morto = "";
@@ -96,7 +113,7 @@ export class JogoatualComponent implements OnInit {
                 this.vul = "Ninguém";
               }
             
-              this.dataAtual = this.dataForma(data[0]["data"]);
+              this.dataAtual = this.dataForma(this.now[0]["data"]);
           }
       },
       err => { console.log(err) }

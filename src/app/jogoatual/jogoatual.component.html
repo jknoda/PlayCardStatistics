@@ -11,8 +11,16 @@
         <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][0]] }}" width="20px" height="20px" />&nbsp;
         <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][2]] }}" width="20px" height="20px" />&nbsp;X&nbsp;
         <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][1]] }}" width="20px" height="20px" />&nbsp;
-        <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][3]] }}" width="20px" height="20px" />
+        <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][3]] }}" width="20px" height="20px" />&nbsp;&nbsp;
+        Sala: {{now[0]["sala"]}}
         <br>
+        <hr>
+        Quantidade de Cartas=>&nbsp;
+        Monte:&nbsp;{{qdeCartas[0]}}<br>
+        <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][0]] }}" width="20px" height="20px" />:&nbsp;{{qdeCartas[dados['SeqJogadores'][0]]}}&nbsp;&nbsp;
+        <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][2]] }}" width="20px" height="20px" />:&nbsp;{{qdeCartas[dados['SeqJogadores'][2]]}}&nbsp;&nbsp;
+        <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][1]] }}" width="20px" height="20px" />:&nbsp;{{qdeCartas[dados['SeqJogadores'][1]]}}&nbsp;&nbsp;
+        <img src = "../../assets/avatars/{{ avatar[dados['SeqJogadores'][3]] }}" width="20px" height="20px" />:&nbsp;{{qdeCartas[dados['SeqJogadores'][3]]}}
         <hr>
         Placar<br>
         <div [ngClass]=[jogadoresAClass]>

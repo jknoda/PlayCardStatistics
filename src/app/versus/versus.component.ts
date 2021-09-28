@@ -57,6 +57,7 @@ export class VersusComponent implements OnInit {
             this.versus = data;
             this.resultado = "";
             this.avatars = JSON.parse(localStorage.getItem("avatar"));
+            console.log('avatar=>',this.avatars);
             if (this.avatars == null){
               this.avatars = [
                 {name: "mitsue",code:"50", imagem: "avatar50"},

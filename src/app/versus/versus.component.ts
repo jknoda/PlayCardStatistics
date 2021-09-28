@@ -51,6 +51,7 @@ export class VersusComponent implements OnInit {
   gerarversus(dados){
     this.service.getVersus(dados).subscribe(
       data => {
+          console.log('data==>',data);
           if (typeof(data) != 'undefined')
           {
             this.versus = data;

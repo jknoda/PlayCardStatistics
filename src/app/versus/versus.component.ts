@@ -68,7 +68,6 @@ export class VersusComponent implements OnInit {
               ];
               localStorage.setItem('avatars', JSON.stringify(this.avatars));
             }
-            console.log('avatars=>',this.avatars);
             let _this = this;
             this.avatars.forEach(function (item) {
               if (_this.versus[0]["resultado"] == "A"){
@@ -92,6 +91,9 @@ export class VersusComponent implements OnInit {
                     _this.imgVencB = item["imagem"];
                   }
                 }
+              }
+              if (_this.imgVencB == null){
+                _this.imgVencB = _this.imgVencA;
               }
             });
             this.mostrar = true;

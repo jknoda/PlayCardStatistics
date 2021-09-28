@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  display:boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -14,6 +16,10 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem("parceiro");
     localStorage.removeItem("avatars");
     localStorage.removeItem("avatarspar");
+  }
+
+  showDialog(){
+    this.display = true;
   }
 
 }

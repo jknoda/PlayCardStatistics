@@ -51,13 +51,11 @@ export class VersusComponent implements OnInit {
   gerarversus(dados){
     this.service.getVersus(dados).subscribe(
       data => {
-          console.log('data==>',data);
           if (typeof(data) != 'undefined')
           {
             this.versus = data;
             this.resultado = "";
-            this.avatars = JSON.parse(localStorage.getItem("avatar"));
-            console.log('avatar=>',this.avatars);
+            this.avatars = JSON.parse(localStorage.getItem("avatars"));
             if (this.avatars == null){
               this.avatars = [
                 {name: "mitsue",code:"50", imagem: "avatar50"},
@@ -68,7 +66,9 @@ export class VersusComponent implements OnInit {
                 {name: "dico",code:"55", imagem: "avatar55"},
                 {name: "celso",code:"56", imagem: "avatar56"},
               ];
+              localStorage.setItem('avatars', JSON.stringify(this.avatars));
             }
+            console.log('avatars=>',this.avatars);
             let _this = this;
             this.avatars.forEach(function (item) {
               if (_this.versus[0]["resultado"] == "A"){

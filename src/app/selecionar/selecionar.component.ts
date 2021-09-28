@@ -34,7 +34,7 @@ export class SelecionarComponent implements OnInit {
       _this.anoLista.push({name: i.toString(),code: i.toString(), imagem:""});
     }    
     this.selectedAno = this.anoLista.slice(-1)[0];
-    this.avatars = JSON.parse(localStorage.getItem("avatar"));
+    this.avatars = JSON.parse(localStorage.getItem('avatars'));
     if (this.avatars == null){
       this.avatars = [
         {name: "mitsue",code:"50", imagem: "avatar50"},
@@ -61,7 +61,7 @@ export class SelecionarComponent implements OnInit {
         () => this.setJogador()
       );      
     });
-    this.avatarsPar = JSON.parse(localStorage.getItem("avatarpar"));
+    this.avatarsPar = JSON.parse(localStorage.getItem('avatarspar'));
     if (this.avatarsPar == null){
       this.avatarsPar = [
         {name: "mitsue",code:"50", imagem: "avatar50"},

@@ -1,4 +1,3 @@
-import { BoundElementProperty } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { JogoModel } from '../model/jogo.model';
 import { RodadaModel } from '../model/rodadas.model';

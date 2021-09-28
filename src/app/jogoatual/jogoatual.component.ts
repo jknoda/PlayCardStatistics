@@ -69,8 +69,12 @@ export class JogoatualComponent implements OnInit {
               this.avatar[2] = "avatar" + this.dados["AvatarJogadores"][1].toString().padStart(2, '0')+".png";
               this.avatar[3] = "avatar" + this.dados["AvatarJogadores"][2].toString().padStart(2, '0')+".png";
               this.avatar[4] = "avatar" + this.dados["AvatarJogadores"][3].toString().padStart(2, '0')+".png";
+              
+              let dataJogo = new Date(this.now[0]["data"]);
+              dataJogo.setHours(dataJogo.getHours()+3);
+              let fim =  new Date() > new Date(this.now[0]["data"]);
 
-              if ( this.dados["Placar01"] >= 3000 || this.dados["Placar02"] >= 3000){
+              if ( this.dados["Placar01"] >= 3000 || this.dados["Placar02"] >= 3000 || fim){
                 this.jogoFinalizado = "Jogo finalizado";    
                 this.bjogoFinalizado = true;  
                 this.atualClass = "finalizado";

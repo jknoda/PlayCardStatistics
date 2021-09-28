@@ -11,6 +11,7 @@ import { PredictModule } from './predict/predict.module';
 import { MenuModule } from 'src/principal/menu/menu.module';
 import { TopoModule } from 'src/principal/topo/topo.module';
 import { JogoatualModule } from './jogoatual/jogoatual.module';
+import { VersusModule } from './versus/versus.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { JogoatualModule } from './jogoatual/jogoatual.module';
     DashboardModule,
     UltimapartidaModule,
     PredictModule,
+    VersusModule,
     JogoatualModule
   ],
   providers: [    

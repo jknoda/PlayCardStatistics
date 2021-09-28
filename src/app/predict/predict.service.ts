@@ -27,4 +27,5 @@ export class PredictService {
         };        
         return this.http.post<PredictModel>(this.urlPy + "/predict", body, httpOptions);
     }
+  
 }

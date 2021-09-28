@@ -1,0 +1,17 @@
+<h1>VERSUS</h1>
+<div class="container">
+        <div class="col-sm-12 col-md-12">
+        <selecionarduplas
+            (jogadorA)="onJogadorA($event)"
+            (parceiroA)="onParceiroA($event)"
+            (jogadorB)="onJogadorB($event)"
+            (parceiroB)="onParceiroB($event)"
+            (callConsultar)="consultarDuplas($event)"
+        ></selecionarduplas>
+    </div>
+    <div class="col-sm-12 col-md-12" *ngIf="mostrar">
+        <br><hr>Vencedores:&nbsp;
+        <img src = "../../assets/avatars/{{imgVencA}}.png" width="20px" height="20px" />
+        <img src = "../../assets/avatars/{{imgVencB}}.png" width="20px" height="20px" />
+    </div>
+</div>

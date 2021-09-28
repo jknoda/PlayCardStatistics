@@ -1,0 +1,25 @@
+<div class="selecionar container">
+    <div>
+    <div class="selparceiro col-sm-12 col-md-6">
+        <label>Parceiros</label>
+        <selecionar 
+        [mostraAno] = "false"
+        [mostraConsultar] = "false"
+        (jogadorSel)="onJogadorA($event)"
+        (parceiroSel)="onParceiroA($event)"
+        ></selecionar>
+    </div>
+    <div class="seladversario col-sm-12 col-md-6">
+        <label>Adversários</label>
+        <selecionar 
+        [mostraAno] = "false"
+        [mostraConsultar] = "false"
+        (jogadorSel)="onJogadorB($event)"
+        (parceiroSel)="onParceiroB($event)"
+        ></selecionar>
+    </div>
+    </div>
+    <div class="col-sm-12 col-md-12">
+        <button class="btn btn-primary" (click)="consultarDuplas($event)">Consultar</button>
+    </div>
+</div>

@@ -1,16 +1,11 @@
-import { computeMsgId } from '@angular/compiler';
-import { Component, OnInit, Output, EventEmitter, ComponentFactoryResolver, Input  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input  } from '@angular/core';
+import { iDropDown } from '../model/iDropDown.model';
 import { SelecionarService } from './selecionar.service';
 
 @Component({
   selector: 'selecionar',
   templateUrl: './selecionar.component.html',
-  styles:[`
-    .selecionar{
-      padding: 5px 5px 5px 5px; 
-      background-color: #54de54;
-    }
-  `]
+  styleUrls: ['./selecionar.component.css']
 })
 
 export class SelecionarComponent implements OnInit {
@@ -28,7 +23,8 @@ export class SelecionarComponent implements OnInit {
   anoLista: iDropDown[] = [];
   selectedAno: iDropDown;
 
-  @Input() mostraAno: boolean;
+  @Input() mostraAno: boolean = true;
+  @Input() mostraConsultar: boolean = true;
 
   constructor(private service: SelecionarService) {
     let aux = "";
@@ -48,23 +44,23 @@ export class SelecionarComponent implements OnInit {
         {name: "tiemi",code:"54", imagem: "avatar54"},
         {name: "dico",code:"55", imagem: "avatar55"},
         {name: "celso",code:"56", imagem: "avatar56"},
-      ]    
-      this.avatars.forEach((value)=>{
-        let dados = {
-          jogador: parseInt(value.code),
-        };
-        this.service.getNome(dados).subscribe(
-          data => {
-              if (typeof(data) != 'undefined')
-              {
-                value.name = data[0]["nome"];
-              }
-          },
-          err => { console.log(err) },
-          () => this.setJogador()
-        );      
-      });
+      ];
     }
+    this.avatars.forEach((value)=>{
+      let dados = {
+        jogador: parseInt(value.code),
+      };
+      this.service.getNome(dados).subscribe(
+        data => {
+            if (typeof(data) != 'undefined')
+            {
+              value.name = data[0]["nome"];
+            }
+        },
+        err => { console.log(err) },
+        () => this.setJogador()
+      );      
+    });
     this.avatarsPar = JSON.parse(localStorage.getItem("avatarpar"));
     if (this.avatarsPar == null){
       this.avatarsPar = [
@@ -76,22 +72,22 @@ export class SelecionarComponent implements OnInit {
         {name: "dico",code:"55", imagem: "avatar55"},
         {name: "celso",code:"56", imagem: "avatar56"},
       ];
-      this.avatarsPar.forEach((value)=>{
-        let dados = {
-          jogador: parseInt(value.code),
-        };
-        this.service.getNome(dados).subscribe(
-          data => {
-              if (typeof(data) != 'undefined')
-              {
-                value.name = data[0]["nome"];
-              }
-          },
-          err => { console.log(err) },
-          () => this.setParceiro()
-        );      
-      });
     }
+    this.avatarsPar.forEach((value)=>{
+      let dados = {
+        jogador: parseInt(value.code),
+      };
+      this.service.getNome(dados).subscribe(
+        data => {
+            if (typeof(data) != 'undefined')
+            {
+              value.name = data[0]["nome"];
+            }
+        },
+        err => { console.log(err) },
+        () => this.setParceiro()
+      );      
+    });
   }
 
   ngOnInit(): void {
@@ -139,8 +135,8 @@ export class SelecionarComponent implements OnInit {
   }  
 }
 
-interface iDropDown {
-  name: string,
-  code: string
-  imagem: string;
-}
+// interface iDropDown {
+//   name: string,
+//   code: string
+//   imagem: string;
+// }

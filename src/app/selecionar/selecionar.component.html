@@ -1,6 +1,6 @@
 <div class="selecionar">
     <div class="row">
-        <div class="col-sm-12 col-md-6" *ngIf="!mostraAno">
+        <div class="col-sm-12 col-md-6" *ngIf="mostraAno">
             <div><b>Ano</b></div>
             <p-dropdown [options]="anoLista" [(ngModel)]="selectedAno" optionLabel="name" (onChange)="onAno($event)">
                 <ng-template pTemplate="selectedItem">
@@ -15,7 +15,7 @@
                 </ng-template>
             </p-dropdown>
         </div>
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-6" *ngIf="mostraConsultar">
             <button class="btn btn-primary" (click)="consultar()">Consultar</button>
         </div>
     </div>

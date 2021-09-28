@@ -61,7 +61,7 @@ export class PredictComponent implements OnInit {
           if (typeof(data) != 'undefined')
           {
             this.predict = data;
-            console.log('predict:',this.predict);
+            //console.log('predict:',this.predict);
             if (this.predict[0]["resultado"] == "V"){
               this.resultado = "Vencedora";     
               this.resultadoImg = "like.png";       

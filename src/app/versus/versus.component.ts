@@ -56,6 +56,17 @@ export class VersusComponent implements OnInit {
             this.versus = data;
             this.resultado = "";
             this.avatars = JSON.parse(localStorage.getItem("avatar"));
+            if (this.avatars == null){
+              this.avatars = [
+                {name: "mitsue",code:"50", imagem: "avatar50"},
+                {name: "mie",code:"51", imagem: "avatar51"},
+                {name: "paula",code:"52", imagem: "avatar52"},
+                {name: "sung",code:"53", imagem: "avatar53"},
+                {name: "tiemi",code:"54", imagem: "avatar54"},
+                {name: "dico",code:"55", imagem: "avatar55"},
+                {name: "celso",code:"56", imagem: "avatar56"},
+              ];
+            }
             let _this = this;
             this.avatars.forEach(function (item) {
               if (_this.versus[0]["resultado"] == "A"){
@@ -86,6 +97,10 @@ export class VersusComponent implements OnInit {
       },
       err => { console.log(err) }
     )
+  }
+
+  apresentarResultado(){
+
   }
 
   onJogadorA(jogador){

@@ -33,6 +33,14 @@
     overflow: scroll;
 }
 
+.principal
+{
+    width: 250px;
+    text-align: center; 
+    padding: 0px 10px 0px 90px;
+}
+
+
 @media screen and (min-width: 800px) {
     .googleplay img{
         text-align: left; 

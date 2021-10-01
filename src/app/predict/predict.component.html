@@ -9,6 +9,9 @@
                 (callConsultar)="consultar($event)"
             ></selecionar>
         </div>
+        <div *ngIf="processando">
+            <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+        </div>  
         <div *ngIf="mostrar">
             <div class="col-sm-12 col-md-6">
                 <img src = "../../assets/image/{{resultadoImg}}" width="60px" height="60px" />

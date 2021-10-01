@@ -15,6 +15,7 @@ export class PredictComponent implements OnInit {
   resultado = "";
   resultadoImg = "";
 
+  processando = false;
   mostrar = false;
 
   private predict: PredictModel = new PredictModel();
@@ -36,6 +37,7 @@ export class PredictComponent implements OnInit {
   }
 
   consultar(e) {
+    this.processando = true;    
     this.mostrar = false;
     let dadosDupla = {
       jogador: this.jogador,
@@ -60,6 +62,7 @@ export class PredictComponent implements OnInit {
       data => {
           if (typeof(data) != 'undefined')
           {
+            this.mostrar = true;
             this.predict = data;
             //console.log('predict:',this.predict);
             if (this.predict[0]["resultado"] == "V"){
@@ -70,7 +73,7 @@ export class PredictComponent implements OnInit {
               this.resultado = "Perdedora";
               this.resultadoImg = "dislike.png";
             }
-            this.mostrar = true;
+            this.processando = false;
           }
       },
       err => { console.log(err) }

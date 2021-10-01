@@ -10,9 +10,7 @@ import { UltimapartidaModule } from './ultimapartida/ultimapartida.module';
 import { PredictModule } from './predict/predict.module';
 import { MenuModule } from 'src/principal/menu/menu.module';
 import { TopoModule } from 'src/principal/topo/topo.module';
-import { JogoatualModule } from './jogoatual/jogoatual.module';
 import { VersusModule } from './versus/versus.module';
-import { HomedModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -27,12 +25,10 @@ import { HomedModule } from './home/home.module';
     MenuModule,
     TopoModule,
 
-    HomedModule,
     DashboardModule,
     UltimapartidaModule,
     PredictModule,
-    VersusModule,
-    JogoatualModule
+    VersusModule
   ],
   providers: [    
   ],

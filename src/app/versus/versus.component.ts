@@ -14,7 +14,10 @@ export class VersusComponent implements OnInit {
   jogadorB = 0;
   parceiroB = 0;
   ano = 0;
+
   mostrar = false;
+  processando = false;
+
   resultado = "";
   imgVencA : any;
   imgVencB : any;
@@ -29,6 +32,7 @@ export class VersusComponent implements OnInit {
   }
 
   consultarDuplas(e){
+    this.processando = true;
     this.mostrar = false;
     let dadosDupla = {
       dupla01a: this.jogadorA,
@@ -96,6 +100,7 @@ export class VersusComponent implements OnInit {
                 _this.imgVencB = _this.imgVencA;
               }
             });
+            this.processando = false;
             this.mostrar = true;
           }
       },

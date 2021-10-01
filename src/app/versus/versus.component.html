@@ -9,6 +9,9 @@
             (callConsultar)="consultarDuplas($event)"
         ></selecionarduplas>
     </div>
+    <div *ngIf="processando">
+        <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+    </div>  
     <div class="col-sm-12 col-md-12" *ngIf="mostrar">
         <br><hr>Vencedores:&nbsp;
         <img src = "../../assets/avatars/{{imgVencA}}.png" width="20px" height="20px" />

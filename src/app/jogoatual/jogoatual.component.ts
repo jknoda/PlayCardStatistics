@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { NowModel } from '../model/now.model';
 import { JogoatualService } from './jogoatual.service';
 import { List } from 'linqts';

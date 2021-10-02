@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceConfig } from '../_config/services.config';
 
 @Component({
   selector: 'home',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  version = ServiceConfig.VERSION;
+
   display:boolean = false;
 
-  constructor() { }
+    constructor() { }
 
   ngOnInit(): void {
     localStorage.removeItem("jogador");

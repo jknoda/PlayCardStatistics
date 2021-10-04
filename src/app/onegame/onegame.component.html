@@ -1,0 +1,93 @@
+<h1>SELECIONAR JOGO</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="col-sm-4">
+                <div><b>Mês</b></div>
+                <p-dropdown [options]="mesLista" [(ngModel)]="selectedMes" optionLabel="name" (onChange)="onChangeMes($event)">
+                    <ng-template pTemplate="selectedItem">
+                        <div *ngIf="selectedMes">
+                            <div>{{selectedMes.name}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-mes pTemplate="item">
+                        <div>
+                            <div>{{mes.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="col-sm-4">
+                <div><b>Ano</b></div>
+                <p-dropdown [options]="anoLista" [(ngModel)]="selectedAno" optionLabel="name" (onChange)="onChangeAno($event)">
+                    <ng-template pTemplate="selectedItem">
+                        <div *ngIf="selectedAno">
+                            <div>{{selectedAno.name}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-ano pTemplate="item">
+                        <div>
+                            <div>{{ano.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="col-sm-4">
+                <div>&nbsp;</div>
+                <button class="btn btn-primary" (click)="selecionarJogo()">Selecionar</button>
+            </div>
+        </div> 
+        <div class="col-sm-12 col-md-6" *ngIf="selecionar">
+            <div class="col-sm-6">
+                <div><b>Jogos</b></div>
+                <p-dropdown [options]="jogoLista" [(ngModel)]="selectedJogo" optionLabel="name">
+                    <ng-template pTemplate="selectedItem">
+                        <div *ngIf="selectedJogo">
+                            <div>{{selectedJogo.name}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-jogo pTemplate="item">
+                        <div>
+                            <div>{{jogo.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="col-sm-6">     
+                <div>&nbsp;</div>   
+                <button class="btn btn-primary" (click)="consultar()">Consultar</button>
+            </div>  
+        </div>
+        
+        <div class="col-sm-12" *ngIf="mostrar">
+            <hr>
+            <div class="col-sm-12 col-md-12">
+                <div>
+                    {{ultimajogada["idf"]}}) Duplas:
+                    <img src = "../../assets/avatars/{{ avatar[1] }}" width="20px" height="20px" /><img src = "../../assets/avatars/{{ avatar[2] }}" width="20px" height="20px" />
+                    &nbsp;X&nbsp;
+                    <img src = "../../assets/avatars/{{ avatar[3] }}" width="20px" height="20px" /><img src = "../../assets/avatars/{{ avatar[4] }}" width="20px" height="20px" />
+                    <br>
+                    Início:{{dataInicial}}<br>
+                    Fim:{{dataFinal}}<br>
+                    Placar: {{ultimajogada["placara"]}} &nbsp;X&nbsp; {{ultimajogada["placarb"]}}
+                </div>
+                <hr>
+                RODADAS<br>
+                <div *ngFor="let rodada of rodadas; let i = index">
+                    {{i+1}}) {{ dataForma(rodada["data"])}}<br>
+                    Ptos <img src = "../../assets/avatars/{{ avatar[1] }}" width="20px" height="20px" /><img src = "../../assets/avatars/{{ avatar[2] }}" width="20px" height="20px" />: {{rodada["ptoa"]}} <b>{{rodada["ptotota"]}}</b> 
+                    Ptos <img src = "../../assets/avatars/{{ avatar[3] }}" width="20px" height="20px" /><img src = "../../assets/avatars/{{ avatar[4] }}" width="20px" height="20px" />: {{rodada["ptob"]}} <b>{{rodada["ptototb"]}}</b>
+                    <br>
+                    <img src = "../../assets/avatars/{{ avatar[1] }}" width="20px" height="20px" /><img src = "../../assets/avatars/{{ avatar[2] }}" width="20px" height="20px" />: Limpas: {{rodada["ala"]+rodada["cla"]+rodada["rla"]}} Sujas: {{rodada["asa"]+rodada["csa"]+rodada["rsa"]}}<br>
+                    <img src = "../../assets/avatars/{{ avatar[3] }}" width="20px" height="20px" /><img src = "../../assets/avatars/{{ avatar[4] }}" width="20px" height="20px" />: Limpas: {{rodada["alb"]+rodada["clb"]+rodada["rlb"]}} Sujas: {{rodada["asb"]+rodada["csb"]+rodada["rsb"]}}<br>
+                    VUL: <img src = "../../assets/avatars/{{ rodada['avVulA'] }}" width="20px" height="20px" /> : {{rodada["vulptoa"]}} ptos <img src = "../../assets/avatars/{{ rodada['avVulB'] }}" width="20px" height="20px" />  : {{rodada["vulptob"]}} ptos<br>
+                    Quem pegou Morto: <img src = "../../assets/avatars/{{ rodada['avMorA'] }}" width="20px" height="20px" /> <img src = "../../assets/avatars/{{ rodada['avMorB'] }}" width="20px" height="20px" /> <br>
+                    Quem Bateu: <img src = "../../assets/avatars/{{ rodada['avBateu'] }}" width="20px" height="20px" />
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

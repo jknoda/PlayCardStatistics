@@ -11,6 +11,7 @@ import { PredictModule } from './predict/predict.module';
 import { MenuModule } from 'src/principal/menu/menu.module';
 import { TopoModule } from 'src/principal/topo/topo.module';
 import { VersusModule } from './versus/versus.module';
+import { OnegameModule } from './onegame/onegame.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { VersusModule } from './versus/versus.module';
     DashboardModule,
     UltimapartidaModule,
     PredictModule,
-    VersusModule
+    VersusModule,
+    OnegameModule
   ],
   providers: [    
   ],

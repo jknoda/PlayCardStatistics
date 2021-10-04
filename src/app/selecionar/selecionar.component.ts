@@ -27,7 +27,6 @@ export class SelecionarComponent implements OnInit {
   @Input() mostraConsultar: boolean = true;
 
   constructor(private service: SelecionarService) {
-    let aux = "";
     const ano = new Date().getFullYear();
     for (let i = ano-3; i <= ano; i++) {
       var _this = this

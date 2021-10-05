@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardService } from './dashboard.service';
 import { DashboardComponent } from './dashboard.component';
 import {CardModule} from 'primeng/card';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -20,7 +19,6 @@ import { SelecionarModule } from '../selecionar/selecionar.module';
         ChartModule,
         SelecionarModule
     ],
-    providers: [DashboardService],
     exports: [DashboardComponent],
 })
 

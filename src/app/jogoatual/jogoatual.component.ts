@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { NowModel } from '../model/now.model';
 import { JogoatualService } from './jogoatual.service';
@@ -7,9 +8,12 @@ import { List } from 'linqts';
 @Component({
   selector: 'jogoatual',
   templateUrl: './jogoatual.component.html',
-  styleUrls: ['./jogoatual.component.css']
+  styleUrls: ['./jogoatual.component.css'],
+  providers: [JogoatualService]
 })
-export class JogoatualComponent implements OnInit {
+export class JogoatualComponent implements OnInit, OnDestroy {
+
+  getNowSubscription: Subscription;
 
   dados : any;
   cartas : any;
@@ -42,7 +46,7 @@ export class JogoatualComponent implements OnInit {
     let parm = {
         sala: 0
     };
-    this.service.getNow(parm).subscribe(
+    this.getNowSubscription = this.service.getNow(parm).subscribe(
       data => {
           if (typeof(data) != 'undefined')
           {
@@ -135,6 +139,10 @@ export class JogoatualComponent implements OnInit {
     let min = dataAux.getMinutes().toString().padStart(2, '0');
     let seg = dataAux.getSeconds().toString().padStart(2, '0');
     return `${dia}/${mes}/${ano} ${hora}:${min}:${seg}`;
+  }
+
+  ngOnDestroy() {
+    this.getNowSubscription.unsubscribe();
   }
 
 }

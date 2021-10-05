@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { iDropDown } from '../model/iDropDown.model';
 import { JogoModel } from '../model/jogo.model';
 import { RodadaModel } from '../model/rodadas.model';
@@ -7,9 +8,14 @@ import { OnegameService } from './onegame.service';
 @Component({
   selector: 'onegame',
   templateUrl: './onegame.component.html',
-  styleUrls: ['./onegame.component.css']
+  styleUrls: ['./onegame.component.css'],
+  providers: [OnegameService]
 })
-export class OnegameComponent implements OnInit {
+export class OnegameComponent implements OnInit, OnDestroy {
+
+  getDadosSubscription: Subscription;
+  getDadosRodadaSubscription: Subscription;
+
   anoLista: iDropDown[] = [];
   selectedAno: iDropDown;
 
@@ -66,7 +72,7 @@ export class OnegameComponent implements OnInit {
       mes: parseInt(this.selectedMes.code),
       ano: parseInt(this.selectedAno.code)
     };
-    this.service.getDados(dados).subscribe(
+    this.getDadosSubscription = this.service.getDados(dados).subscribe(
       data => {
           if (typeof(data) != 'undefined')
           {
@@ -116,7 +122,7 @@ export class OnegameComponent implements OnInit {
       idf:idf,
       ordem:"ASC"
     };
-    this.service.getDadosRodada(dados).subscribe(
+    this.getDadosRodadaSubscription = this.service.getDadosRodada(dados).subscribe(
       (data:any) => {
           if (typeof(data) != 'undefined')
           {
@@ -166,6 +172,11 @@ export class OnegameComponent implements OnInit {
     let hora = dataAux.getHours().toString().padStart(2, '0');
     let min = dataAux.getMinutes().toString().padStart(2, '0');
     return `${dia}/${mes}/${ano} ${hora}:${min}`;
+  }
+
+  ngOnDestroy() {
+    this.getDadosSubscription.unsubscribe();
+    this.getDadosRodadaSubscription.unsubscribe();
   }
 
 }

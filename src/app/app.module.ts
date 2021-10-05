@@ -24,13 +24,7 @@ import { OnegameModule } from './onegame/onegame.module';
     HttpClientModule,
 
     MenuModule,
-    TopoModule,
-
-    DashboardModule,
-    UltimapartidaModule,
-    PredictModule,
-    VersusModule,
-    OnegameModule
+    TopoModule    
   ],
   providers: [    
   ],

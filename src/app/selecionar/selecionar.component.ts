@@ -1,18 +1,22 @@
-import { Component, OnInit, Output, EventEmitter, Input  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy  } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { iDropDown } from '../model/iDropDown.model';
 import { SelecionarService } from './selecionar.service';
 
 @Component({
   selector: 'selecionar',
   templateUrl: './selecionar.component.html',
-  styleUrls: ['./selecionar.component.css']
+  styleUrls: ['./selecionar.component.css'],
+  providers: [SelecionarService]
 })
 
-export class SelecionarComponent implements OnInit {
+export class SelecionarComponent implements OnInit, OnDestroy {
   @Output() anoSel = new EventEmitter<Number>();
   @Output() jogadorSel = new EventEmitter<Number>();
   @Output() parceiroSel = new EventEmitter<Number>();
   @Output() callConsultar = new EventEmitter<any>();
+
+  getNomeSubscription: Subscription;
 
   avatars: iDropDown[];
   selectedAvatar: iDropDown;
@@ -49,7 +53,7 @@ export class SelecionarComponent implements OnInit {
       let dados = {
         jogador: parseInt(value.code),
       };
-      this.service.getNome(dados).subscribe(
+      this.getNomeSubscription = this.service.getNome(dados).subscribe(
         data => {
             if (typeof(data) != 'undefined')
             {
@@ -76,7 +80,7 @@ export class SelecionarComponent implements OnInit {
       let dados = {
         jogador: parseInt(value.code),
       };
-      this.service.getNome(dados).subscribe(
+      this.getNomeSubscription = this.service.getNome(dados).subscribe(
         data => {
             if (typeof(data) != 'undefined')
             {
@@ -132,10 +136,8 @@ export class SelecionarComponent implements OnInit {
     localStorage.setItem('parceiro', JSON.stringify(this.selectedAvatarPar));
     this.parceiroSel.emit(parseInt(this.selectedAvatarPar.code));
   }  
-}
 
-// interface iDropDown {
-//   name: string,
-//   code: string
-//   imagem: string;
-// }
+  ngOnDestroy() {
+    this.getNomeSubscription.unsubscribe();
+  }
+}

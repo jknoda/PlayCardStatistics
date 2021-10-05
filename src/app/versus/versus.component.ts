@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { iDropDown } from '../model/iDropDown.model';
 import { VersusModel } from '../model/versus.model';
 import { VersusService } from './versus.service';
@@ -6,9 +7,13 @@ import { VersusService } from './versus.service';
 @Component({
   selector: 'versus',
   templateUrl: './versus.component.html',
-  styleUrls: ['./versus.component.css']
+  styleUrls: ['./versus.component.css'],
+  providers: [VersusService]
 })
-export class VersusComponent implements OnInit {
+export class VersusComponent implements OnInit, OnDestroy {
+  getDadosVersusSubscription: Subscription;
+  getVersusSubscription: Subscription;
+
   jogadorA = 0;
   parceiroA = 0;
   jogadorB = 0;
@@ -40,7 +45,7 @@ export class VersusComponent implements OnInit {
       dupla02a: this.jogadorB,
       dupla02b: this.parceiroB
     };
-    this.service.getDadosVersus(dadosDupla).subscribe(
+    this.getDadosVersusSubscription = this.service.getDadosVersus(dadosDupla).subscribe(
       data => {
           if (typeof(data) != 'undefined')
           {
@@ -53,7 +58,7 @@ export class VersusComponent implements OnInit {
   }
 
   gerarversus(dados){
-    this.service.getVersus(dados).subscribe(
+    this.getVersusSubscription = this.service.getVersus(dados).subscribe(
       data => {
           if (typeof(data) != 'undefined')
           {
@@ -125,4 +130,9 @@ export class VersusComponent implements OnInit {
   onParceiroB(parceiro){
     this.parceiroB = parceiro;
   }  
+
+  ngOnDestroy() {
+    this.getDadosVersusSubscription.unsubscribe();
+    this.getVersusSubscription.unsubscribe();
+  }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { JogoModel } from '../model/jogo.model';
 import { RodadaModel } from '../model/rodadas.model';
 import { UltimapartidaService } from './ultimapartida.service';
@@ -6,9 +7,14 @@ import { UltimapartidaService } from './ultimapartida.service';
 @Component({
   selector: 'ultimapartida',
   templateUrl: './ultimapartida.component.html',
-  styleUrls: ['./ultimapartida.component.css']
+  styleUrls: ['./ultimapartida.component.css'],
+  providers: [UltimapartidaService]
 })
-export class UltimapartidaComponent implements OnInit {
+export class UltimapartidaComponent implements OnInit, OnDestroy {
+
+  getDadosSubscription: Subscription;
+  getDadosRodadaSubscription: Subscription;
+
   jogador = 0;
   parceiro = 0;
   ano = 0;
@@ -34,7 +40,7 @@ export class UltimapartidaComponent implements OnInit {
         jogador: this.jogador,
         parceiro: this.parceiro,
     };
-    this.service.getDados(dados).subscribe(
+    this.getDadosSubscription = this.service.getDados(dados).subscribe(
       data => {
           if (typeof(data) != 'undefined')
           {
@@ -63,7 +69,7 @@ export class UltimapartidaComponent implements OnInit {
       idf:idf,
       ordem:"ASC"
     };
-    this.service.getDadosRodada(dados).subscribe(
+    this.getDadosRodadaSubscription = this.service.getDadosRodada(dados).subscribe(
       (data:any) => {
           if (typeof(data) != 'undefined')
           {
@@ -115,5 +121,10 @@ export class UltimapartidaComponent implements OnInit {
     let hora = dataAux.getHours().toString().padStart(2, '0');
     let min = dataAux.getMinutes().toString().padStart(2, '0');
     return `${dia}/${mes}/${ano} ${hora}:${min}`;
+  }
+
+  ngOnDestroy() {
+    this.getDadosSubscription.unsubscribe();
+    this.getDadosRodadaSubscription.unsubscribe();
   }
 }

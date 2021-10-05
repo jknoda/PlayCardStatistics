@@ -2,10 +2,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {DialogModule} from 'primeng/dialog';
+import { DashboardModule } from 'src/app/dashboard/dashboard.module';
 
 import { HomeComponent } from 'src/app/home/home.component';
 import { JogoatualComponent } from 'src/app/jogoatual/jogoatual.component';
 import { JogoatualService } from 'src/app/jogoatual/jogoatual.service';
+import { OnegameModule } from 'src/app/onegame/onegame.module';
+import { PredictModule } from 'src/app/predict/predict.module';
+import { UltimapartidaModule } from 'src/app/ultimapartida/ultimapartida.module';
+import { VersusModule } from 'src/app/versus/versus.module';
 import { MenuComponent } from './menu.component';
 
 @NgModule({
@@ -19,13 +24,17 @@ import { MenuComponent } from './menu.component';
         HomeComponent,
         JogoatualComponent
     ],
-    providers: [
-        JogoatualService
-    ],
+    providers: [],
     imports: [
         CommonModule, 
         RouterModule,
-        DialogModule
+        DialogModule,
+
+        DashboardModule,
+        UltimapartidaModule,
+        PredictModule,
+        VersusModule,
+        OnegameModule
     ]
 })
 

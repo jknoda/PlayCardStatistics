@@ -1,12 +1,16 @@
-import { Component, Input, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { JogadasModel } from '../model/jogadas.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'dashboard',
-  templateUrl: './dashboard.component.html'
+  templateUrl: './dashboard.component.html',
+  providers: [DashboardService]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+  getDadosSubscription: Subscription;
+
   jogador = 0;
   parceiro = 0;
   ano = 0;
@@ -55,7 +59,7 @@ export class DashboardComponent implements OnInit {
         mesfim: 12
     };
     //console.log('dados: ',dados);
-    this.service.getDados(dados).subscribe(
+    this.getDadosSubscription = this.service.getDados(dados).subscribe(
       data => {
           if (typeof(data) != 'undefined')
           {
@@ -144,7 +148,6 @@ export class DashboardComponent implements OnInit {
           }
       ]
     }
-
   }
 
   zerar(){
@@ -160,4 +163,8 @@ export class DashboardComponent implements OnInit {
     this.p_totalpartidas = 0;
   }
 
+  ngOnDestroy() {
+    this.getDadosSubscription.unsubscribe();
+  }
+  
 }

@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { PredictModel } from '../model/predict.model.';
 import { PredictService } from './predict.service';
 
 @Component({
   selector: 'predict',
   templateUrl: './predict.component.html',
-  styleUrls: ['./predict.component.css']
+  styleUrls: ['./predict.component.css'],
+  providers: [PredictService]
 })
-export class PredictComponent implements OnInit {
+export class PredictComponent implements OnInit, OnDestroy {
+  getPredictSubscription: Subscription;
+  getDadosDuplaSubscription: Subscription;
 
   jogador = 0;
   parceiro = 0;
@@ -44,7 +48,7 @@ export class PredictComponent implements OnInit {
       parceiro: this.parceiro,
       ano: this.ano
     };
-    this.service.getDadosDupla(dadosDupla).subscribe(
+    this.getDadosDuplaSubscription = this.service.getDadosDupla(dadosDupla).subscribe(
       data => {
           if (typeof(data) != 'undefined')
           {
@@ -58,7 +62,7 @@ export class PredictComponent implements OnInit {
   }
 
   gerarpredict(dados){
-    this.service.getPredict(dados).subscribe(
+    this.getPredictSubscription = this.service.getPredict(dados).subscribe(
       data => {
           if (typeof(data) != 'undefined')
           {
@@ -78,5 +82,10 @@ export class PredictComponent implements OnInit {
       },
       err => { console.log(err) }
     )
+  }
+
+  ngOnDestroy() {
+    this.getDadosDuplaSubscription.unsubscribe();
+    this.getPredictSubscription.unsubscribe();
   }
 }

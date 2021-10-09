@@ -97,7 +97,8 @@ export class OnegameComponent implements OnInit, OnDestroy {
       });
       ind++;
     });
-    this.selectedJogo = this.jogoLista.slice(-1)[0];
+    
+    this.selectedJogo = this.jogoLista.slice(0)[0];
     this.selecionar = true;
   }
 
